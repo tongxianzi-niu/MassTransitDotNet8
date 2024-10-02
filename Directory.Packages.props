@@ -27,6 +27,7 @@
     <PackageVersion Include="Iesi.Collections" Version="4.1.1" />
     <PackageVersion Include="Ionic.Zlib.Core" Version="1.0.0" />
     <PackageVersion Include="Marten" Version="7.26.1" />
+    <PackageVersion Include="MassTransit" Version="8.2.5" />
     <PackageVersion Include="MathNet.Numerics" Version="5.0.0" />
     <PackageVersion Include="MediatR" Version="12.2.0" />
     <PackageVersion Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.22.0" />

@@ -157,7 +157,7 @@
 
         protected override IBusControl CreateBus()
         {
-            var busControl = MassTransit.Bus.Factory.CreateUsingActiveMq(x =>
+            var busControl = MassTransit.Bus.Factory.CreateUsingAmqp(x =>
             {
                 ConfigureHost(x);
 
