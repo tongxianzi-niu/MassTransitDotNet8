@@ -10,7 +10,7 @@ namespace MassTransit
         /// Configure a ActiveMQ host using the configuration API
         /// </summary>
         /// <param name="configurator"></param>
-        /// <param name="hostAddress">The URI host address of the ActiveMQ host (activemq://host:port/vhost)</param>
+        /// <param name="hostAddress">The URI host address of the ActiveMQ host (amqp://host:port/vhost)</param>
         /// <param name="configure"></param>
         public static void Host(this IActiveMqBusFactoryConfigurator configurator, Uri hostAddress, Action<IActiveMqHostConfigurator> configure)
         {

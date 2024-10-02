@@ -27,7 +27,7 @@
 
             InputQueueName = inputQueueName ?? "input_queue";
 
-            HostAddress = new Uri("activemq://localhost/");
+            HostAddress = new Uri("amqp://localhost/");
         }
 
         public Uri HostAddress

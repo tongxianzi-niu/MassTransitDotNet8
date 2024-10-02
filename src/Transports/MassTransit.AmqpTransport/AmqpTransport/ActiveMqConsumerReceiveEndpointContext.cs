@@ -47,7 +47,7 @@
 
         public override void Probe(ProbeContext context)
         {
-            context.Add("type", "ActiveMQ");
+            context.Add("type", "AMQP");
             context.Set(new
             {
                 _configuration.Settings.EntityName,

@@ -62,7 +62,7 @@
         {
             context.Set(new
             {
-                Type = "ActiveMQ",
+                Type = "AMQP",
                 _hostConfiguration.Settings.Host,
                 _hostConfiguration.Settings.Port,
                 _hostConfiguration.Settings.Username,

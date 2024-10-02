@@ -24,7 +24,7 @@
         {
             _busConfiguration = busConfiguration;
 
-            _hostSettings = new ConfigurationHostSettings(new Uri("activemq://localhost"));
+            _hostSettings = new ConfigurationHostSettings(new Uri("amqp://localhost"));
             _topology = new ActiveMqBusTopology(this, topologyConfiguration);
 
             ReceiveTransportRetryPolicy = Retry.CreatePolicy(x =>

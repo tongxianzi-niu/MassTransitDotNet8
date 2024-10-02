@@ -51,7 +51,7 @@ namespace MassTransit
             var scheme = address.Scheme.ToLowerInvariant();
             switch (scheme)
             {
-                case ActiveMqHostAddress.ActiveMqScheme:
+                case ActiveMqHostAddress.AmqpScheme:
                     ParseLeft(hostAddress, out Scheme, out Host, out Port, out VirtualHost);
 
                     address.ParseHostPathAndEntityName(out VirtualHost, out Name);
@@ -130,7 +130,7 @@ namespace MassTransit
                 Scheme = address.Scheme,
                 Host = address.Host,
                 Port = address.Port.HasValue
-                    ? address.Port.Value == 61616
+                    ? address.Port.Value == 5672
                         ? -1
                         : address.Port.Value
                     : -1,

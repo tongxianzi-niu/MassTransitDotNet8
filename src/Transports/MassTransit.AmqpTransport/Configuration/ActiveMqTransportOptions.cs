@@ -7,8 +7,8 @@ namespace MassTransit
     {
         public ActiveMqTransportOptions()
         {
-            Host = HostMetadataCache.IsRunningInContainer ? "activemq" : "localhost";
-            Port = 61616;
+            Host = HostMetadataCache.IsRunningInContainer ? "amqp" : "localhost";
+            Port = 5672;
             User = "admin";
             Pass = "admin";
         }

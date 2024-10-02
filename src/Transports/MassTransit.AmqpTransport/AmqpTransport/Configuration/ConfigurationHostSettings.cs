@@ -40,7 +40,7 @@ namespace MassTransit.AmqpTransport.Configuration
             var hostAddress = new ActiveMqHostAddress(address);
 
             Host = hostAddress.Host;
-            Port = hostAddress.Port ?? 61616;
+            Port = hostAddress.Port ?? 5672;
 
             Username = "";
             Password = "";
@@ -54,10 +54,10 @@ namespace MassTransit.AmqpTransport.Configuration
                     Password = parts[1];
             }
 
-            TransportOptions = new Dictionary<string, string> { { "wireFormat.tightEncodingEnabled", "true" } };
+            //TransportOptions = new Dictionary<string, string> { { "wireFormat.tightEncodingEnabled", "true" } };
 
-            _hostAddress = new Lazy<Uri>(FormatHostAddress);
-            _brokerAddress = new Lazy<Uri>(FormatBrokerAddress);
+            //_hostAddress = new Lazy<Uri>(FormatHostAddress);
+            //_brokerAddress = new Lazy<Uri>(FormatBrokerAddress);
         }
 
         public string[] FailoverHosts { get; set; }
@@ -104,11 +104,11 @@ namespace MassTransit.AmqpTransport.Configuration
                     ));
                 //filter failover parameters only
                 var failoverQueryPart = GetQueryString(kv => IsFailoverArgument(kv.Key));
-                return new Uri($"activemq:failover:({failoverPart}){failoverQueryPart}");
+                return new Uri($"amqp:failover:({failoverPart}){failoverQueryPart}");
             }
 
             var queryPart = GetQueryString(_ => true);
-            var uri = new Uri($"activemq:{scheme}://{Host}:{Port}{queryPart}");
+            var uri = new Uri($"amqp:{scheme}://{Host}:{Port}{queryPart}");
             return uri;
         }
 

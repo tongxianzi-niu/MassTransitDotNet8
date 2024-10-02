@@ -13,7 +13,7 @@ namespace MassTransit.AmqpTransport.Configuration
         {
             _settings = new ConfigurationHostSettings(address);
 
-            if (_settings.Port == 61617 || _settings.Host.EndsWith("amazonaws.com", StringComparison.OrdinalIgnoreCase))
+            if (_settings.Port == 5671 || _settings.Host.EndsWith("amazonaws.com", StringComparison.OrdinalIgnoreCase))
                 UseSsl();
         }
 
@@ -32,15 +32,15 @@ namespace MassTransit.AmqpTransport.Configuration
         public void UseSsl(bool enabled = true)
         {
             _settings.UseSsl = enabled;
-            if (enabled && _settings.Port == 61616)
-                _settings.Port = 61617;
+            if (enabled && _settings.Port == 5672)
+                _settings.Port = 5671;
         }
 
         public void UseSsl(bool enabled, bool updatePort)
         {
             _settings.UseSsl = enabled;
-            if (enabled && updatePort && _settings.Port == 61616)
-                _settings.Port = 61617;
+            if (enabled && updatePort && _settings.Port == 5672)
+                _settings.Port = 5671;
         }
 
         public void FailoverHosts(string[] hosts)

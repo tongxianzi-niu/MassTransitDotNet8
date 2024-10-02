@@ -8,7 +8,7 @@ namespace MassTransit
     [DebuggerDisplay("{" + nameof(DebuggerDisplay) + "}")]
     public readonly struct ActiveMqHostAddress
     {
-        public const string ActiveMqScheme = "activemq";
+        public const string AmqpScheme = "amqp";
 
         public readonly string Scheme;
         public readonly string Host;
@@ -25,7 +25,7 @@ namespace MassTransit
             var scheme = address.Scheme.ToLowerInvariant();
             switch (scheme)
             {
-                case ActiveMqScheme:
+                case AmqpScheme:
                     ParseLeft(address, out Scheme, out Host, out Port, out VirtualHost);
                     break;
 
@@ -36,13 +36,13 @@ namespace MassTransit
 
         public ActiveMqHostAddress(string host, int? port, string virtualHost)
         {
-            Scheme = ActiveMqScheme;
+            Scheme = AmqpScheme;
             Host = host;
             Port = port;
             VirtualHost = virtualHost;
 
             if (port <= 0)
-                Port = 61616;
+                Port = 5672;
         }
 
         static void ParseLeft(Uri address, out string scheme, out string host, out int? port, out string virtualHost)
@@ -51,7 +51,7 @@ namespace MassTransit
             host = address.Host;
 
             port = address.IsDefaultPort || address.Port <= 0
-                ? 61616
+                ? 5672
                 : address.Port;
 
             virtualHost = address.ParseHostPath();
@@ -64,7 +64,7 @@ namespace MassTransit
                 Scheme = address.Scheme,
                 Host = address.Host,
                 Port = address.Port.HasValue
-                    ? address.Port.Value == 61616
+                    ? address.Port.Value == 5672
                         ? -1
                         : address.Port.Value
                     : -1,
