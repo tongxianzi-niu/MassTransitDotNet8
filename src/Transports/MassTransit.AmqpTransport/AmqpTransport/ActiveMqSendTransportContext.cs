@@ -32,7 +32,7 @@ namespace MassTransit.AmqpTransport
         }
 
         public override string EntityName { get; }
-        public override string ActivitySystem => "activemq";
+        public override string ActivitySystem => "amqp";
 
         public Task Send(IPipe<SessionContext> pipe, CancellationToken cancellationToken = default)
         {

@@ -55,9 +55,10 @@ namespace MassTransit.AmqpTransport.Configuration
             }
 
             //TransportOptions = new Dictionary<string, string> { { "wireFormat.tightEncodingEnabled", "true" } };
+            TransportOptions = new Dictionary<string, string>();
 
-            //_hostAddress = new Lazy<Uri>(FormatHostAddress);
-            //_brokerAddress = new Lazy<Uri>(FormatBrokerAddress);
+            _hostAddress = new Lazy<Uri>(FormatHostAddress);
+            _brokerAddress = new Lazy<Uri>(FormatBrokerAddress);
         }
 
         public string[] FailoverHosts { get; set; }
@@ -86,7 +87,7 @@ namespace MassTransit.AmqpTransport.Configuration
 
         Uri FormatBrokerAddress()
         {
-            var scheme = UseSsl ? "ssl" : "tcp";
+            var scheme = UseSsl ? "amqps" : "amqp";
 
             // create broker URI: http://activemq.apache.org/nms/activemq-uri-configuration.html
             if (FailoverHosts?.Length > 0)
@@ -104,11 +105,11 @@ namespace MassTransit.AmqpTransport.Configuration
                     ));
                 //filter failover parameters only
                 var failoverQueryPart = GetQueryString(kv => IsFailoverArgument(kv.Key));
-                return new Uri($"amqp:failover:({failoverPart}){failoverQueryPart}");
+                return new Uri($"failover:({failoverPart}){failoverQueryPart}");
             }
 
             var queryPart = GetQueryString(_ => true);
-            var uri = new Uri($"amqp:{scheme}://{Host}:{Port}{queryPart}");
+            var uri = new Uri($"{scheme}://{Host}:{Port}{queryPart}");
             return uri;
         }
 
@@ -126,7 +127,7 @@ namespace MassTransit.AmqpTransport.Configuration
         {
             return new UriBuilder
             {
-                Scheme = UseSsl ? "ssl" : "tcp",
+                Scheme = UseSsl ? "amqps" : "amqp",
                 Host = Host,
                 Port = Port
             }.Uri.ToString();

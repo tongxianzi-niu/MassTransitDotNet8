@@ -80,7 +80,7 @@ namespace MassTransit.AmqpTransport.Middleware
         {
             return settings.AutoDelete
                 ? entityName ?? settings.EntityName
-                : $"{entityName ?? settings.EntityName}?consumer.prefetchSize={settings.PrefetchCount}";
+                : $"{entityName ?? settings.EntityName}";
         }
 
         Supervisor CreateConsumerSupervisor(SessionContext context, ActiveMqConsumer[] actualConsumers)

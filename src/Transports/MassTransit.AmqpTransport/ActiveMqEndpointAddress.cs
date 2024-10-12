@@ -52,6 +52,7 @@ namespace MassTransit
             switch (scheme)
             {
                 case ActiveMqHostAddress.AmqpScheme:
+                case ActiveMqHostAddress.AmqpsScheme:
                     ParseLeft(hostAddress, out Scheme, out Host, out Port, out VirtualHost);
 
                     address.ParseHostPathAndEntityName(out VirtualHost, out Name);
